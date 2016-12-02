@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>lab3</title>
+        <meta charset='utf-8'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="lab3plus.css">
+        
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script> <!-- jquery cdn-->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><!-- bootrstrap javascript cdn-->
+        <script src="cirkelplus.js"></script>
+        <script src="rektangelplus.js"></script>
+        <script src="triangelplus.js"></script>
+        <script src="lab3plus.js"></script>
+    </head>
+    <body>
+        
+        <div class="status-bar">
+            <p id="status"></p>
+        </div>
+    
+        <!--dropdown meny/knapp -->
+<!-- <div class="dropdown">
+  <button id= "buttonMeny" class="menybtn">Meny</button>-->
+   
+      <div class="main-panel">
+            <div class='con'>
+                <div class="bar-menu">  
+        
+                    <button id= "menu" class="menybtn">Meny</button>
+                    <div id='drawOptions'>
+                        <button onclick="clearCanvas()">rensa canvas</button>
+                        <button>rita cirkel</button>
+                        <button>rita rektangel</button>
+                        <button>rita triangel</button>
+                        <button>Avbryt handling</button>
+                        <button id="export">Exportera till JSON</button>    
+                    </div>
+
+    </div>
+                
+                <canvas id="myCanvas" width="400px" height="400px">Text som visas om webbläsaren inte stöder canvas-elementet</canvas>
+                
+                <div class="color-div">
+                    <div class="input-group" >
+                        <input type="text" class="form-control" id="colorInput" onkeyup="checkColorInput(this.value)" placeholder="Choose a color">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" id="okButton" type="button" onclick="changeColor()">OK</button>
+                        </span>
+                    </div>
+                    <small id="warning"  style="color:red;"></small>
+                    <input type="color" name="color" value="#0080ff ">      
+                    <select>
+                        <option selected>välj färg</option>
+                        <option value="#ff0000 ">röd</option>
+                        <option value="#FFFF00 ">gul</option>
+                        <option value="#008000 ">grön</option>
+                        <option value="#000000 ">svart</option>
+                    </select>
+                </div>    
+                
+
+            </div>
+
+        </div>
+        <input type="text" id="jsonInput" value="">
+
+        
+
+    </body>
+</html>

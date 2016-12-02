@@ -1,0 +1,56 @@
+.main-panel{
+    display:flex;
+    justify-content: center;
+}
+
+.con{
+    display:flex;
+    justify-content: space-around;
+    width:80vw;
+
+}
+#menu{
+    height:40px;
+    background-color: green;
+    border-radius: 10px;
+           color: white;
+           padding: 16px;
+           font-size: 16px;
+           border: none;
+}
+.bar-menu{
+    display: flex;
+    flex-direction: column;
+}
+
+.color-div{
+    display:flex;
+    flex-direction: column;
+    width:30%;
+    position: relative;
+    bottom: -300px;
+    
+    
+}
+
+.status-bar{
+    border:1px solid green;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+canvas{
+    border:2px dashed black;
+    margin-left: 30px;
+    border-radius: 25px;
+    margin-right: 20px;
+
+}
+
+select {
+    margin-top: 10px;
+}
+
+#jsonInput {
+    margin-left: 20px;
+}
+    
