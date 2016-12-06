@@ -8,7 +8,7 @@
         <link rel="stylesheet" type="text/css" href="lab3plus.css">
         
         <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script> <!-- jquery cdn-->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><!-- bootrstrap javascript cdn-->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><!-- bootrstrap-->
         <script src="cirkelplus.js"></script>
         <script src="rektangelplus.js"></script>
         <script src="triangelplus.js"></script>
@@ -20,17 +20,26 @@
             <p id="status"></p>
         </div>
     
-        <!--dropdown meny/knapp -->
-<!-- <div class="dropdown">
-  <button id= "buttonMeny" class="menybtn">Meny</button>-->
+               
+        
+        <!--menu/knapp -->
+
    
       <div class="main-panel">
             <div class='con'>
                 <div class="bar-menu">  
         
-                    <button id= "menu" class="menybtn">Meny</button>
+                    
+                    <div id="buttons" class= "trebuttons">
+                <button>rita cirkel</button>
+                <button>rita rektangel</button> 
+                <button>rita triangel</button>
+        </div>
+        
+                    
+                <button id= "menu" class="menybtn">Meny</button>
                     <div id='drawOptions'>
-                        <button onclick="clearCanvas()">rensa canvas</button>
+                        <button id = "clear">rensa canvas</button>
                         <button>rita cirkel</button>
                         <button>rita rektangel</button>
                         <button>rita triangel</button>
@@ -60,10 +69,11 @@
                     </select>
                 </div>    
                 
-
             </div>
 
-        </div>
+          </div>
+        
+                
         <input type="text" id="jsonInput" value="">
 
         

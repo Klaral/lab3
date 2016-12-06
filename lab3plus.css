@@ -53,4 +53,8 @@ select {
 #jsonInput {
     margin-left: 20px;
 }
-    
+   
+#buttons { 
+  margin-bottom: 50px;
+  display: flex;
+}

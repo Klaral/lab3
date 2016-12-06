@@ -10,10 +10,7 @@ function Rectangle(x1, y1, x2, y2){
         ctx.beginPath();     // börja en path
         ctx.strokeRect(this.x1, this.y1, width, height);
         ctx.stroke();
-        //addToSaveDrawings();
-        //let select = document.getElementsByTagName('select')[0];      // rita alla linjer i path
-        //ct.fillStyle = select.value;
-        //ct.fill();    
+           
     }
 
     }

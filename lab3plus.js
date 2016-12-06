@@ -11,7 +11,7 @@ window.addEventListener('load', function() {
 		}
 	});
 
-	var drawOptionsChildren = drawOptions.children; //menu buttons
+	var drawOptionsChildren = drawOptions.children; //menu knappar
 	var whatToDraw = "";
 	var coordinates = [];
 
@@ -33,8 +33,7 @@ window.addEventListener('load', function() {
 
 	
 	canvas.addEventListener('mouseover', event => {
-		// check if we are drwaing somthing  check what we are drawing 
-		// update status accordingly
+		
 		if(whatToDraw === "cirkel"){
 			status('välj cirkelens mittpunkten');
 		}else if(whatToDraw === "rektangel"){
@@ -55,28 +54,41 @@ window.addEventListener('load', function() {
 		var y = event.clientY - rect.top;
 		return { x: x, y: y };
 	}
-    //var type = '';
+   
     var drawed= [];
 	for(var i = 0; i < drawOptionsChildren.length; i++){
 		drawOptionsChildren[i].addEventListener('click', function(event){
-			//trigger click events when click menu buttons   where to update status bar
+			
 			var selectedOption = event.target.innerHTML;
 
-			//var statusBar = document.getElementById('status');
-			status(selectedOption); // what to update status bar
-			whatToDraw = selectedOption.split(" ")[1];//substring
-			coordinates = [];//when change mind to click next button, should update to empty
+			
+			status(selectedOption); 
+			whatToDraw = selectedOption.split(" ")[1];
+			coordinates = [];
 		});
 	}
 
+var trebuttons = document.getElementsByClassName("trebuttons")[0];
+var buttonsChildren = trebuttons.children;
+    for(var i = 0; i < buttonsChildren.length; i++){
+		buttonsChildren[i].addEventListener('click', function(event){
+			
+			var selectedOption = event.target.innerHTML;
+
+			
+			status(selectedOption); 
+			whatToDraw = selectedOption.split(" ")[1];
+			coordinates = [];
+		});
+	}
 
 	canvas.addEventListener('click',function(event){
-		var coordinate = getMousePos(this,event);//who call , this will be who, but only can be object
+		var coordinate = getMousePos(this,event);
 		coordinates.push(coordinate);
 
 		if(whatToDraw === "cirkel"){
 			if(coordinates.length === 1 ){
-				//var statusBar = document.getElementById('status');
+				
 				status('Klicka för välja cirkelens radie, nu är position: x:' + getMousePos(this,event).x + ', ' + 'y:' + getMousePos(this,event).y + ' ,Viewport:x: ' + event.clientX + ', ' + 'y:' + event.clientY + ' ,antal klick: ' + coordinates.length); 	
 			}else if (coordinates.length === 2){
 				var d = Math.sqrt( (coordinates[0].x-coordinates[1].x)*(coordinates[0].x-coordinates[1].x) + (coordinates[0].y-coordinates[1].y)*(coordinates[0].y-coordinates[1].y) );
@@ -89,7 +101,7 @@ window.addEventListener('load', function() {
 					coordinates:coordinates
 				};
 				drawed.push(object);
-				//type = whatToDraw;
+				
 				coordinates = [];
 			}
 		}else if(whatToDraw === "rektangel"){
@@ -126,7 +138,7 @@ window.addEventListener('load', function() {
 					color: ctx.strokeStyle,
 					coordinates:coordinates
 				};
-				drawed.push(object);//a list with drawed object
+				drawed.push(object);
 				type = whatToDraw;
 				coordinates = [];
 			}
@@ -136,13 +148,29 @@ window.addEventListener('load', function() {
 		}	
 
 	});	
-
-	
-	var expoteraButton = document.getElementById('export');
-	expoteraButton.addEventListener('click',function(event){
-		var expoterad = JSON.stringify(drawed);//it is a list with all drawed objects
-		var jsonInput = document.getElementById('jsonInput');
-		jsonInput.value = expoterad;
+    var clear = document.getElementById("clear");
+    clear.addEventListener("click", function(event){
+	var canvas = document.getElementById('myCanvas');
+	var ctx = canvas.getContext("2d");
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawed = [];
+});
+	var color= document.getElementsByName("color")[0];
+    color.addEventListener("change", function(event){
+    ctx.strokeStyle = color.value; 
+});
+	var expoteraButton = document.getElementById("export");
+	expoteraButton.addEventListener("click",function(event){
+		var expoterad = JSON.stringify(drawed);
+		var jsonInput = document.getElementById("jsonInput");
+        if(drawed.length===0){
+            jsonInput.value= " ";
+            
+        }else{
+            var expoterad = JSON.stringify(drawed);
+            jsonInput.value = expoterad;
+        }
+		
 		//console.log(expoterad);
 	});
 });
@@ -153,16 +181,16 @@ function isHexaColor(sNum){
          && ! isNaN( parseInt(noHashValue, 16) );
 }
 function checkColorInput(text) {
-	var okButton = document.getElementById('okButton'); 
-	var warning = document.getElementById('warning');
+	var okButton = document.getElementById("okButton"); 
+	var warning = document.getElementById("warning");
 	if(isHexaColor(text)){
 		okButton.disabled = false;
-		warning.innerHTML ='';
+		warning.innerHTML ="";
 	}
 	else{
 		okButton.disabled = true;
 		warning.innerHTML = 'Vänligen skriv in hexadecimal color värde';
-		//alert ('please input valid hexadecimal color value');
+		
 	}
 }
 
@@ -170,15 +198,16 @@ function changeColor(){
 	var colorInput = document.getElementById('colorInput');
 	var color = document.getElementsByName('color')[0];
 	color.value = colorInput.value;
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+    ctx.strokeStyle = color.value;
 	var newOption = document.createElement('option');
 	newOption.text = colorInput.value;
 	newOption.value = colorInput.value;
 	var select = document.getElementsByTagName('select')[0];
 	select.appendChild(newOption);
-	//select.add(newOption);
-	var canvas = document.getElementById("myCanvas");
-	var ctx = canvas.getContext("2d");
-	ctx.strokeStyle = color.value;
+	
+	
 	status('Du har plockat ut färg '+  colorInput.value);
 	colorInput.value = '';
 	colorInput.placeholder = "Välj en färg";
@@ -189,61 +218,5 @@ function status(str="") {
 		statusBar.innerText = str;
 }
 
-/*function validateColor(colorInput){
-		//var colorInput = document.getElementById('colorInput');
-		colorInput = colorInput.toUpperCase();
-		var allowed = ['A','B','C','D','E','F','0','1','2','3','4','5','6','7','8','9'];
-		var count = 0;
-		if(colorInput.charAt(0)==='#'){
-			for(var i = 1;i < colorInput.length; i++){
-				for(var j = 0; j < allowed.length; j++){
-					if(colorInput[i] === allowed[j]){
-						count++;
-						break;
-					}
 
-				}
-			}
-		}
-		if(count === 6){
-			return true;
-		}
-		else{
-			return false;
-		}
-	}
-*/
-/*function changeColor(){
-	var colorInput = document.getElementById('colorInput');
-	if(colorInput.value.length ==7 && colorInput.value != undefined){
-		if(validateColor(colorInput.value)===true){
-			
-			let color = document.getElementsByName('color')[0];
-			//if(isHexaColor(colorInput.value) === true){
-			color.value = colorInput.value;
-			let newOption = document.createElement('option');
-			newOption.text = colorInput.value;
-			newOption.value = colorInput.value;
-			let select = document.getElementsByTagName('select')[0];
-			select.appendChild(newOption);
-			colorInput.value = '';
-			colorInput.placeholder = "Välj en färg";
-			//select.add(newOption);
-			let canvas = document.getElementById("myCanvas");
-			let ctx = canvas.getContext("2d");
-			ctx.strokeStyle = colorInput.value;
-			status('Du har plockat ut färg '+  color.value);
-		}
-	}else{
-		alert('Du har valt felaktig color format, det måste vara en hexadecimal format.');
-	}
-	
-}
 
-*/
-
-function clearCanvas(){
-	var canvas = document.getElementById('myCanvas');
-	var ctx = canvas.getContext("2d");
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
-}

@@ -7,9 +7,6 @@ function Circle(centerX, centerY, radius){
         ctx.beginPath();
         ctx.arc(this.centerX, this.centerY, this.radius, 0, 2*Math.PI); // 2*PI motsvarar 360 grader
         ctx.stroke();
-        //addToSaveDrawings();
-        //let select = document.getElementsByTagName('select')[0];      // rita alla linjer i path
-        //ctx.fillStyle = select.value;
-        //ctx.fill();
+        
     }
     }
